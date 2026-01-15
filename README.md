@@ -11,7 +11,7 @@ You can read the subject [here](https://github.com/Binary-Hackers/42_Subjects/bl
 - Clone the `push_swap_visualizer` repository into the directory where your `push_swap` project is located:
 
 ```bash
-git clone https://github.com/o-reo/push_swap_visualizer.git
+git clone https://github.com/Raraph84/push_swap_visualizer.git
 ```
 
 This project uses C++17, cmake, SFML and ImGui.
