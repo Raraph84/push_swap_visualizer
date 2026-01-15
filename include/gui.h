@@ -21,6 +21,7 @@ private:
   int speed;
   STATE state;
   float scale;
+  std::string algorithmFlag;
 
   void _updateControls();
   void _drawBars();
@@ -32,7 +33,7 @@ private:
 public:
   sf::RenderWindow _window;
 
-  Gui();
+  Gui(const std::string &flag = "");
   ~Gui();
 
   void loop();

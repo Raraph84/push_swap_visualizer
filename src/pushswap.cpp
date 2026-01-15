@@ -9,11 +9,17 @@
 PushSwap::PushSwap() : path{"../../push_swap"} {}
 PushSwap::~PushSwap() {}
 
-void PushSwap::run(const std::string &numbers) {
+void PushSwap::run(const std::string &numbers, const std::string &flag) {
   this->commands.clear();
   std::array<char, 128> buffer;
   std::string result;
   std::string command = this->path + " " + numbers;
+  
+  // Add the flag if provided
+  if (!flag.empty()) {
+    command += " " + flag;
+  }
+  
   std::unique_ptr<FILE, decltype(&pclose)> pipe(popen(command.c_str(), "r"),
                                                 pclose);
 

@@ -7,8 +7,9 @@
 #include <misc/cpp/imgui_stdlib.h>
 #include <random>
 
-Gui::Gui()
+Gui::Gui(const std::string &flag)
     : generateNumberSize{0}, speed{1}, state{STATE::Stopped}, scale{1.0f},
+      algorithmFlag{flag},
       _window{sf::VideoMode::getDesktopMode(), "Push Swap Visualizer"} {
   _window.setFramerateLimit(60);
 }
@@ -110,8 +111,30 @@ void Gui::_updateControls() {
 
   ImGui::Text("push_swap file path");
   ImGui::InputText("", &this->pushswap.path);
+  
+  ImGui::Text("Algorithm");
+  if (ImGui::RadioButton("No flag", this->algorithmFlag.empty())) {
+    this->algorithmFlag = "";
+  }
+  ImGui::SameLine();
+  if (ImGui::RadioButton("--adaptive", this->algorithmFlag == "--adaptive")) {
+    this->algorithmFlag = "--adaptive";
+  }
+  ImGui::SameLine();
+  if (ImGui::RadioButton("--simple", this->algorithmFlag == "--simple")) {
+    this->algorithmFlag = "--simple";
+  }
+  ImGui::SameLine();
+  if (ImGui::RadioButton("--medium", this->algorithmFlag == "--medium")) {
+    this->algorithmFlag = "--medium";
+  }
+  ImGui::SameLine();
+  if (ImGui::RadioButton("--complex", this->algorithmFlag == "--complex")) {
+    this->algorithmFlag = "--complex";
+  }
+  
   if (ImGui::Button("Compute")) {
-    this->pushswap.run(this->numbers);
+    this->pushswap.run(this->numbers, this->algorithmFlag);
     this->state = STATE::Stopped;
     this->queues.start(Utils::SplitStringToInt(this->numbers, ' '));
     this->queues.commands = this->pushswap.commands;

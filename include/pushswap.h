@@ -10,7 +10,7 @@ private:
 public:
     PushSwap();
     ~PushSwap();
-    void run(const std::string &numbers);
+    void run(const std::string &numbers, const std::string &flag = "");
 
     std::string path;
     std::list<std::string> commands;
